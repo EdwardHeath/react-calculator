@@ -8,10 +8,10 @@ class Calculator extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      displayValue: 0,
+      displayValue: '0',
       storedValue: 0,
       currentOperation: '',
-      userIsEnteringANumber: true,
+      userIsEnteringANumber: false,
       numberIsDecimal: false,
     };
   }
@@ -19,9 +19,9 @@ class Calculator extends React.Component {
   handleDigitClick = e => {
     const digit = e.target.innerHTML;
     const { displayValue, userIsEnteringANumber } = this.state;
-    const newValue = parseInt(
-      userIsEnteringANumber ? displayValue + digit : digit
-    );
+    const newValue = userIsEnteringANumber
+      ? `${displayValue}${digit}`
+      : `${digit}`;
     this.setState({
       displayValue: newValue,
       userIsEnteringANumber: true,
@@ -32,7 +32,7 @@ class Calculator extends React.Component {
     const currentOperation = e.target.innerHTML;
     this.setState(state => ({
       currentOperation,
-      storedValue: state.displayValue,
+      storedValue: parseFloat(state.displayValue),
       userIsEnteringANumber: false,
       numberIsDecimal: false,
     }));
@@ -40,10 +40,10 @@ class Calculator extends React.Component {
 
   handleClearClick = () => {
     this.setState({
-      displayValue: 0,
+      displayValue: '0',
       storedValue: 0,
       currentOperation: '',
-      userIsEnteringANumber: true,
+      userIsEnteringANumber: false,
       numberIsDecimal: false,
     });
   };
@@ -55,19 +55,22 @@ class Calculator extends React.Component {
     this.setState({
       numberIsDecimal: true,
       displayValue: newValue,
+      userIsEnteringANumber: true,
     });
   };
 
   handleEqualsClick = () => {
     const { storedValue, currentOperation, displayValue } = this.state;
     if (currentOperation === '') return;
-    const evalStr = `${storedValue} ${currentOperation} ${displayValue}`;
+    const evalStr = `${storedValue} ${currentOperation} ${parseFloat(
+      displayValue
+    )}`;
     const newValue = eval(evalStr);
     this.setState({
       displayValue: newValue,
       storedValue: evalStr,
       currentOperation: '',
-      userIsEnteringANumber: true,
+      userIsEnteringANumber: false,
     });
   };
 

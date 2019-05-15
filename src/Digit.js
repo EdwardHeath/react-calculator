@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-function Digit({ number, onAction }) {
+function Digit({ number, onAction, id }) {
   return (
-    <button className="digit" type="button" onClick={onAction}>
+    <button className="digit" id={id} type="button" onClick={onAction}>
       {number}
     </button>
   );
@@ -11,6 +11,7 @@ function Digit({ number, onAction }) {
 Digit.propTypes = {
   number: PropTypes.number.isRequired,
   onAction: PropTypes.func.isRequired,
+  id: PropTypes.string,
 };
 
 export default Digit;

@@ -74,6 +74,22 @@ class Calculator extends React.Component {
     });
   };
 
+  handleNegateClick = () => {
+    const { displayValue } = this.state;
+    const negated = `${parseFloat(displayValue) * -1}`;
+    this.setState({
+      displayValue: negated,
+    });
+  };
+
+  handlePercentClick = () => {
+    const { displayValue } = this.state;
+    const percent = `${parseFloat(displayValue) / 100}`;
+    this.setState({
+      displayValue: percent,
+    });
+  };
+
   render() {
     const { displayValue, storedValue, currentOperation } = this.state;
 
@@ -86,22 +102,29 @@ class Calculator extends React.Component {
         />
         <Display value={displayValue} />
         <div className="calculator-buttons">
-          <Operation name="+" onAction={this.handleOperationClick} />
-          <Operation name="-" onAction={this.handleOperationClick} />
-          <Operation name="*" onAction={this.handleOperationClick} />
+          <Operation name="mr" onAction={this.handleClearClick} />
+          <Operation name="C" onAction={this.handleClearClick} />
+          <Operation name="±" onAction={this.handleNegateClick} />
+          <Operation name="%" onAction={this.handlePercentClick} />
           <Operation name="/" onAction={this.handleOperationClick} />
+          <Operation name="10x" onAction={this.handleOperationClick} />
           <Digit number={7} onAction={this.handleDigitClick} />
-          <Digit number={8} onAction={this.handleDigitClick} />
+          <Digit number={8} onAction={this.handleDigitClick} />{' '}
           <Digit number={9} onAction={this.handleDigitClick} />
+          <Operation name="*" onAction={this.handleOperationClick} />
+          <Operation name="log10" onAction={this.handleOperationClick} />
           <Digit number={4} onAction={this.handleDigitClick} />
           <Digit number={5} onAction={this.handleDigitClick} />
           <Digit number={6} onAction={this.handleDigitClick} />
+          <Operation name="-" onAction={this.handleOperationClick} />
+          <Operation name="EE" onAction={this.handleOperationClick} />
           <Digit number={1} onAction={this.handleDigitClick} />
           <Digit number={2} onAction={this.handleDigitClick} />
           <Digit number={3} onAction={this.handleDigitClick} />
-          <Digit number={0} onAction={this.handleDigitClick} />
+          <Operation name="+" onAction={this.handleOperationClick} />
+          <Operation name="Rand" onAction={this.handleOperationClick} />
+          <Digit number={0} id="zero" onAction={this.handleDigitClick} />
           <Operation name="." id="decimal" onAction={this.handleDecimalClick} />
-          <Operation name="C" id="clear" onAction={this.handleClearClick} />
           <Operation name="=" id="equals" onAction={this.handleEqualsClick} />
         </div>
       </div>

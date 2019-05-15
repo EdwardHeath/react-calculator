@@ -15,7 +15,7 @@ function Display({ value, id, operation }) {
 }
 
 Display.propTypes = {
-  value: PropTypes.string.isRequired,
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
   id: PropTypes.string,
   operation: PropTypes.string,
 };

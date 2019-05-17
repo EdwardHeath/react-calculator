@@ -90,6 +90,29 @@ class Calculator extends React.Component {
     });
   };
 
+  handlePiClick = () => {
+    this.setState({
+      displayValue: `${Math.PI}`,
+      numberIsDecimal: true,
+    });
+  };
+
+  handleEClick = () => {
+    this.setState({
+      displayValue: `${Math.E}`,
+      numberIsDecimal: true,
+    });
+  };
+
+  handleRandomClick = () => {
+    const random = Math.random();
+    this.setState({
+      displayValue: `${random}`,
+      numberIsDecimal: true,
+      userIsEnteringANumber: false,
+    });
+  };
+
   render() {
     const { displayValue, storedValue, currentOperation } = this.state;
 
@@ -102,30 +125,81 @@ class Calculator extends React.Component {
         />
         <Display value={displayValue} />
         <div className="calculator-buttons">
+          {/* Row 1 */}
+          <Operation name="(" onAction={this.handleClearClick} />
+          <Operation name=")" onAction={this.handleClearClick} />
+          <Operation name="m+" onAction={this.handleClearClick} />
+          <Operation name="mc" onAction={this.handleClearClick} />
+          <Operation name="m-" onAction={this.handleClearClick} />
           <Operation name="mr" onAction={this.handleClearClick} />
           <Operation name="C" onAction={this.handleClearClick} />
           <Operation name="±" onAction={this.handleNegateClick} />
           <Operation name="%" onAction={this.handlePercentClick} />
-          <Operation name="/" onAction={this.handleOperationClick} />
+          <Operation
+            name="/"
+            className="arithmetic"
+            onAction={this.handleOperationClick}
+          />
+          {/* Row 2 */}
+          <Operation name="2nd" onAction={this.handleOperationClick} />
+          <Operation name="x2" onAction={this.handleOperationClick} />
+          <Operation name="x3" onAction={this.handleOperationClick} />
+          <Operation name="xy" onAction={this.handleOperationClick} />
+          <Operation name="ex" onAction={this.handleOperationClick} />
           <Operation name="10x" onAction={this.handleOperationClick} />
           <Digit number={7} onAction={this.handleDigitClick} />
           <Digit number={8} onAction={this.handleDigitClick} />{' '}
           <Digit number={9} onAction={this.handleDigitClick} />
-          <Operation name="*" onAction={this.handleOperationClick} />
+          <Operation
+            name="*"
+            className="arithmetic"
+            onAction={this.handleOperationClick}
+          />
+          {/* Row 3 */}
+          <Operation name="1/x" onAction={this.handleOperationClick} />
+          <Operation name="x1/2" onAction={this.handleOperationClick} />
+          <Operation name="x1/3" onAction={this.handleOperationClick} />
+          <Operation name="x1/y" onAction={this.handleOperationClick} />
+          <Operation name="ln" onAction={this.handleOperationClick} />
           <Operation name="log10" onAction={this.handleOperationClick} />
           <Digit number={4} onAction={this.handleDigitClick} />
           <Digit number={5} onAction={this.handleDigitClick} />
           <Digit number={6} onAction={this.handleDigitClick} />
-          <Operation name="-" onAction={this.handleOperationClick} />
+          <Operation
+            name="-"
+            className="arithmetic"
+            onAction={this.handleOperationClick}
+          />
+          {/* Row 4 */}
+          <Operation name="x!" onAction={this.handleOperationClick} />
+          <Operation name="sin" onAction={this.handleOperationClick} />
+          <Operation name="cos" onAction={this.handleOperationClick} />
+          <Operation name="tan" onAction={this.handleOperationClick} />
+          <Operation name="e" onAction={this.handleEClick} />
           <Operation name="EE" onAction={this.handleOperationClick} />
           <Digit number={1} onAction={this.handleDigitClick} />
           <Digit number={2} onAction={this.handleDigitClick} />
           <Digit number={3} onAction={this.handleDigitClick} />
-          <Operation name="+" onAction={this.handleOperationClick} />
-          <Operation name="Rand" onAction={this.handleOperationClick} />
+          <Operation
+            name="+"
+            className="arithmetic"
+            onAction={this.handleOperationClick}
+          />
+          {/* Row 5 */}
+          <Operation name="Rad" onAction={this.handleOperationClick} />
+          <Operation name="sinh" onAction={this.handleOperationClick} />
+          <Operation name="cosh" onAction={this.handleOperationClick} />
+          <Operation name="tanh" onAction={this.handleOperationClick} />
+          <Operation name="π" onAction={this.handlePiClick} />
+          <Operation name="Rand" onAction={this.handleRandomClick} />
           <Digit number={0} id="zero" onAction={this.handleDigitClick} />
           <Operation name="." id="decimal" onAction={this.handleDecimalClick} />
-          <Operation name="=" id="equals" onAction={this.handleEqualsClick} />
+          <Operation
+            name="="
+            className="arithmetic"
+            id="equals"
+            onAction={this.handleEqualsClick}
+          />
         </div>
       </div>
     );
